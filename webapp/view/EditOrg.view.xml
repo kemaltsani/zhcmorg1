@@ -1,0 +1,14 @@
+<mvc:View controllerName="zhcmorg1.controller.EditOrg"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <!-- <App id="app">
+    </App> -->
+    <Page id="_IDGenPage1" title="Edit Organization" showNavButton="true" navButtonType="Back" 
+                             navButtonPress="onBack">
+		<content>
+			<Text id="_IDGenText1" xmlns="sap.m" text="I am in Page-2 {/recipient/name}">
+			</Text>
+		</content>
+	</Page>    
+</mvc:View>

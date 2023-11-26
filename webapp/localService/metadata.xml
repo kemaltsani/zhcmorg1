@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZHCM_CHART_ORG_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Attributes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Label" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Lines" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="From" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="To" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Nodes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Src" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="Char 500 Case-Sensitive" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Supervisor" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Team" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Position" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Phone" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="NodesToAttribute" Relationship="ZHCM_CHART_ORG_SRV.NodesToAttribute" FromRole="FromRole_NodesToAttribute" ToRole="ToRole_NodesToAttribute"/>
+            </EntityType>
+            <EntityType Name="Org" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="OrgToNodes" Relationship="ZHCM_CHART_ORG_SRV.OrgToNodes" FromRole="FromRole_OrgToNodes" ToRole="ToRole_OrgToNodes"/>
+                <NavigationProperty Name="OrgToLines" Relationship="ZHCM_CHART_ORG_SRV.OrgToLines" FromRole="FromRole_OrgToLines" ToRole="ToRole_OrgToLines"/>
+            </EntityType>
+            <Association Name="NodesToAttribute" sap:content-version="1">
+                <End Type="ZHCM_CHART_ORG_SRV.Nodes" Multiplicity="1" Role="FromRole_NodesToAttribute"/>
+                <End Type="ZHCM_CHART_ORG_SRV.Attributes" Multiplicity="*" Role="ToRole_NodesToAttribute"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_NodesToAttribute">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_NodesToAttribute">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="OrgToLines" sap:content-version="1">
+                <End Type="ZHCM_CHART_ORG_SRV.Org" Multiplicity="1" Role="FromRole_OrgToLines"/>
+                <End Type="ZHCM_CHART_ORG_SRV.Lines" Multiplicity="*" Role="ToRole_OrgToLines"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OrgToLines">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OrgToLines">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="OrgToNodes" sap:content-version="1">
+                <End Type="ZHCM_CHART_ORG_SRV.Org" Multiplicity="1" Role="FromRole_OrgToNodes"/>
+                <End Type="ZHCM_CHART_ORG_SRV.Nodes" Multiplicity="1" Role="ToRole_OrgToNodes"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OrgToNodes">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OrgToNodes">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZHCM_CHART_ORG_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="AttributesSet" EntityType="ZHCM_CHART_ORG_SRV.Attributes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LinesSet" EntityType="ZHCM_CHART_ORG_SRV.Lines" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="NodesSet" EntityType="ZHCM_CHART_ORG_SRV.Nodes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="OrgSet" EntityType="ZHCM_CHART_ORG_SRV.Org" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="NodesToAttributeSet" Association="ZHCM_CHART_ORG_SRV.NodesToAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="NodesSet" Role="FromRole_NodesToAttribute"/>
+                    <End EntitySet="AttributesSet" Role="ToRole_NodesToAttribute"/>
+                </AssociationSet>
+                <AssociationSet Name="OrgToNodesSet" Association="ZHCM_CHART_ORG_SRV.OrgToNodes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="OrgSet" Role="FromRole_OrgToNodes"/>
+                    <End EntitySet="NodesSet" Role="ToRole_OrgToNodes"/>
+                </AssociationSet>
+                <AssociationSet Name="OrgToLinesSet" Association="ZHCM_CHART_ORG_SRV.OrgToLines" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="OrgSet" Role="FromRole_OrgToLines"/>
+                    <End EntitySet="LinesSet" Role="ToRole_OrgToLines"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://sapwdp.sinarmasmining.com:8002/sap/opu/odata/sap/ZHCM_CHART_ORG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://sapwdp.sinarmasmining.com:8002/sap/opu/odata/sap/ZHCM_CHART_ORG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
